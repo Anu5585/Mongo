@@ -1,0 +1,222 @@
+No sql db
+document oriented
+open source cross-platform
+document oriented database written in C++
+silent features
+development faster 
+deploy easier 
+scale bigger 
+mongo DB development started in 2007 MongoDB 2.4.9 was the latest and stable version released on 10 january 2014 
+what is document oriented database?
+ MongoDB stores data as documents so it is known as document oriented database
+data is stored as BSON 
+if you can come from relational database management system background :
+database = database 
+tables = collection 
+rows = document
+
+
+mongod is the host process for database
+mongo is the command line shell that connects to specific installs for Mongod
+
+mongoDB k lie default port  27017 hoti 
+
+Mongodb k lie  local disk C my 1 Data naam ka foler banana pry ga or u k andr db nam ka
+If we do not create a folder in. local disk C. the folder which name is. data and db It gives us error.
+Now go to program files in C Go to Mongo DB folder. then server then enter to bin then copy that url esy  : C:\Program Files\MongoDB\Server\7.0 
+control panel then system and security then system then advance system setting  then envirement variable then path then edit then new and paste that path then ok ok 
+
+then windows power shell run as administrator
+
+
+
+
+how to use:  inserting data in mongodb
+
+phly 1 powershell mn mongod open krna h or 1 mn mongosh krna h open then 
+mongosh k nechy esy krna h 
+esy bana h db:  use annasKart
+then :  db.items.insertOne({ name:"samsung A22", price:50000 , rating:4.5}) esy item insert krty h 
+
+multiple items esy : 
+db.items.insertMany([{ name:"Apple 14", price:250000 , rating:4.8 , qty:500 , sold: 250} , {name:"samsung A22", price:50000 , rating:4.5 , qty:233 , sold: 98}])
+
+is trah sy db mn search krty h : db.items.find()
+
+
+
+database queries krny k lie : 
+ db.items.find({rating:4.5})
+
+
+
+sara esy chalaya h : 
+
+
+PS C:\Users\annas> mongosh
+Current Mongosh Log ID: 65b6a1ce6084a3e5330fcb01
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1
+Using MongoDB:          7.0.5
+Using Mongosh:          2.1.1
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-01-28T23:23:35.396+05:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin       40.00 KiB
+annas       40.00 KiB
+annasKart   72.00 KiB
+config     108.00 KiB
+local       72.00 KiB
+test> use annasKart
+switched to db annasKart
+annasKart> show collections
+items
+annasKart>
+
+annasKart> db.items.find()
+[
+  {
+    _id: ObjectId('65b69dc6f1fd767273c21453'),
+    name: 'samsung A22',
+    price: 50000,
+    rating: 4.5,
+    qty: 233,
+    sold: 98
+  },
+  {
+    _id: ObjectId('65b6a038f1fd767273c21454'),
+    name: 'Apple 14',
+    price: 250000,
+    rating: 4.8,
+    qty: 500,
+    sold: 250
+  },
+  {
+    _id: ObjectId('65b6a038f1fd767273c21455'),
+    name: 'samsung A22',
+    price: 50000,
+    rating: 4.5,
+    qty: 233,
+    sold: 98
+  }
+]
+annasKart> db.items.find({price:3.5})
+
+annasKart> db.items.find({rating:3.5})
+
+annasKart> db.items.find({rating:4.5})
+[
+  {
+    _id: ObjectId('65b69dc6f1fd767273c21453'),
+    name: 'samsung A22',
+    price: 50000,
+    rating: 4.5,
+    qty: 233,
+    sold: 98
+  },
+  {
+    _id: ObjectId('65b6a038f1fd767273c21455'),
+    name: 'samsung A22',
+    price: 50000,
+    rating: 4.5,
+    qty: 233,
+    sold: 98
+  }
+]
+annasKart> db.items.find({rating: {$gte:4.5}})
+[
+  {
+    _id: ObjectId('65b69dc6f1fd767273c21453'),
+    name: 'samsung A22',
+    price: 50000,
+    rating: 4.5,
+    qty: 233,
+    sold: 98
+  },
+  {
+    _id: ObjectId('65b6a038f1fd767273c21454'),
+    name: 'Apple 14',
+    price: 250000,
+    rating: 4.8,
+    qty: 500,
+    sold: 250
+  },
+  {
+    _id: ObjectId('65b6a038f1fd767273c21455'),
+    name: 'samsung A22',
+    price: 50000,
+    rating: 4.5,
+    qty: 233,
+    sold: 98
+  }
+]
+annasKart> db.items.find({rating: {$gte:4.5} , price:{$gt:4000}})
+[
+  {
+    _id: ObjectId('65b69dc6f1fd767273c21453'),
+    name: 'samsung A22',
+    price: 50000,
+    rating: 4.5,
+    qty: 233,
+    sold: 98
+  },
+  {
+    _id: ObjectId('65b6a038f1fd767273c21454'),
+    name: 'Apple 14',
+    price: 250000,
+    rating: 4.8,
+    qty: 500,
+    sold: 250
+  },
+  {
+    _id: ObjectId('65b6a038f1fd767273c21455'),
+    name: 'samsung A22',
+    price: 50000,
+    rating: 4.5,
+    qty: 233,
+    sold: 98
+  }
+]
+
+for deleting db : 
+db.items.deleteOne({price:50000})
+
+for updating db: 
+db.items.updateOne({name:"Apple 14"} ,{$set: {price:360000}})
+
+db.items.updateMany({name:"Apple 14"} ,{$set: {price:360000 ,  rating: 3}})
+
+
+
+what is Mongos ?
+it helps h to connect mongosdb to nodejs 
+
+eg : 
+
+npm init 
+npm install mongoose
+website : https://mongoosejs.com/docs/
+codes : 
+const mongoose = require('mongoose');
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/annasKart', {useNewUrlParser:true , useUnifiedTopology:true});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function(){
+    console.log("We are connected ");
+})
+
+what is Mongodb compas ? 
+
+is k lie mongod run karna lazmi h power shell py 
+
+ye 1 GUI h  iska mtlb ye h k hmy commands type krny ki zurart nai h 
+
+
